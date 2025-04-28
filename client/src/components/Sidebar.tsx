@@ -74,35 +74,39 @@ const Sidebar = ({ mobileOpen = false, onClose }: SidebarProps) => {
         <div className="space-y-3">
           <p className="text-xs text-gray-400 uppercase tracking-wider">Explore</p>
           {navItems.map((item) => (
-            <Link key={item.path} href={item.path}>
-              <a 
-                className={cn(
-                  "flex items-center p-2 rounded-lg transition",
-                  location === item.path
-                    ? "bg-space-purple/20 text-space-purple font-medium"
-                    : "hover:bg-white/5"
-                )}
-                onClick={() => isMobile && onClose?.()}
-              >
-                <i className={`${item.icon} mr-3`}></i>
-                <span>{item.name}</span>
-              </a>
-            </Link>
+            <div 
+              key={item.path}
+              className={cn(
+                "flex items-center p-2 rounded-lg transition cursor-pointer",
+                location === item.path
+                  ? "bg-space-purple/20 text-space-purple font-medium"
+                  : "hover:bg-white/5"
+              )}
+              onClick={() => {
+                window.location.href = item.path;
+                isMobile && onClose?.();
+              }}
+            >
+              <i className={`${item.icon} mr-3`}></i>
+              <span>{item.name}</span>
+            </div>
           ))}
         </div>
 
         <div className="space-y-3">
           <p className="text-xs text-gray-400 uppercase tracking-wider">Tools</p>
           {toolItems.map((item) => (
-            <Link key={item.path} href={item.path}>
-              <a 
-                className="flex items-center p-2 rounded-lg hover:bg-white/5 transition"
-                onClick={() => isMobile && onClose?.()}
-              >
-                <i className={`${item.icon} mr-3`}></i>
-                <span>{item.name}</span>
-              </a>
-            </Link>
+            <div 
+              key={item.path}
+              className="flex items-center p-2 rounded-lg hover:bg-white/5 transition cursor-pointer"
+              onClick={() => {
+                window.location.href = item.path;
+                isMobile && onClose?.();
+              }}
+            >
+              <i className={`${item.icon} mr-3`}></i>
+              <span>{item.name}</span>
+            </div>
           ))}
         </div>
       </div>
@@ -111,7 +115,7 @@ const Sidebar = ({ mobileOpen = false, onClose }: SidebarProps) => {
         <p className="text-sm mb-2">Current Location</p>
         <div className="flex justify-between text-xs">
           <span>42.3601° N, 71.0589° W</span>
-          <a href="#" className="text-space-blue">Change</a>
+          <span className="text-space-blue cursor-pointer">Change</span>
         </div>
       </div>
     </nav>
